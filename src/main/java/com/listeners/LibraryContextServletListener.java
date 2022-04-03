@@ -1,6 +1,6 @@
 package com.listeners;
 
-import com.common.Book;
+import com.beans.Book;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

@@ -1,17 +1,22 @@
-package com.common;
+package com.beans;
 
 import java.util.*;
 
 public class Book {
+    protected static int counter = 0;
     protected String title;
     protected String author;
     protected int year;
+    protected int id;
 
     public Book(String title, String author, int year) {
         this.author = author;
         this.title = title;
         this.year = year;
+        counter += 1;
+        this.id = counter;
     }
+
     public Book(int i){
         List<String> authors = new ArrayList<>(
                 Arrays.asList("Stephen King", "J. K. Rowling", "Ernest Hemingway", "William Shakespeare", "J. R. R. Tolkien",
@@ -27,6 +32,16 @@ public class Book {
         this.author = authors.get( i % authors.size());
         this.title = titles.get(i % titles.size());
         this.year = yearSeed + generator.nextInt(range);
+        counter += 1;
+        this.id = counter;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -34,7 +49,8 @@ public class Book {
         return "Book{" +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", year=" + year +
+                ", year='" + year + '\'' +
+                ", id=" + id +
                 '}';
     }
 
@@ -43,11 +59,11 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return year == book.year && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+        return id == book.id || year == book.year && Objects.equals(title, book.title) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, year);
+        return Objects.hash(title, author, year, id);
     }
 }
